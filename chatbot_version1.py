@@ -11,11 +11,11 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import FAISS
 import streamlit as st
 from langchain_community.chat_message_histories import StreamlitChatMessageHistory
-
+import tempfile
 
 #Configure streamlit app
-st.set_page_config(page_title="Type 2 Diabetes Mellitus Clinical Practice Guidelines", page_icon="➳❥", layout = "centered")
-st.title("📖 T2DM Clinical Practice Guidelines \n - VA/DoD Clinical Practice Guideline for the Management of Type 2 Diabetes Mellitus")
+st.set_page_config(page_title="Family Medicine Clinical Practice Guidelines", page_icon="➳❥", layout = "centered")
+st.title("📖 Family Medicine Clinical Practice Guidelines \n your one stop latest CPG chatbot")
 
 #Define convenience functions
 @st.cache_resource
@@ -34,24 +34,53 @@ def config_llm():
     return llm
 
 @st.cache_resource
-def config_vector_db(pdf_file_path):
-    client = boto3.client('bedrock-runtime')
-    bedrock_embeddings = BedrockEmbeddings(client=client)
-    loader = PyPDFLoader(pdf_file_path)
-    pages = loader.load_and_split()
-    
-    #Creating the FAISS vector store from the documents
-    vectorstore_faiss = FAISS.from_documents(pages, bedrock_embeddings)
-    return vectorstore_faiss
+def config_vector_db():
+    s3_client = boto3.client('s3')
+    bedrock_client = boto3.client('bedrock-runtime')
+    bedrock_embeddings = BedrockEmbeddings(client=bedrock_client)
+    all_documents = []
 
-my_pdf_file_path = "./documents/file.pdf"
+    bucket_name = 'chatbot1-bucket'
+    folder_path = 'chatbot1-folder'
+
+    # List all files in the S3 folder
+    s3_objects = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=folder_path)
+
+    # Iterate over all files in the S3 folder
+    for obj in s3_objects.get('Contents', []):
+        if obj['Key'].endswith(".pdf"):  # Check if the file is a PDF
+            pdf_file_key = obj['Key']
+            file_name = os.path.basename(pdf_file_key)
+
+            # Download the PDF file to a temporary location
+            with tempfile.NamedTemporaryFile(delete=False) as temp_pdf_file:
+                s3_client.download_fileobj(bucket_name, pdf_file_key, temp_pdf_file)
+                temp_pdf_file_path = temp_pdf_file.name
+
+            print(f"Processing {file_name}...")
+
+            # Load and process the PDF file
+            loader = PyPDFLoader(temp_pdf_file_path)
+            pages = loader.load_and_split()
+
+            # Add the pages to the list of all documents
+            all_documents.extend(pages)
+
+            print(f"Finished processing {file_name}")
+
+            # Clean up the temporary file
+            os.remove(temp_pdf_file_path)
+
+    # Creating the FAISS vectorstore from the documents
+    vectorstore_faiss = FAISS.from_documents(all_documents, bedrock_embeddings)
+    return vectorstore_faiss
 
 #Configuring the llm and vector store
 llm = config_llm()
-vectorstore_faiss = config_vector_db(my_pdf_file_path)
+vectorstore_faiss = config_vector_db()
 
 context = """
-You are a knowledgeable assistant specialized in Type 2 Diabetes Mellitus clinical practice guidelines 
+You are a knowledgeable assistant specialized in various clinical practice guidelines 
 exclusively for licensed healthcare providers. Your responses should be concise, 
 and aligned with the clinical practice guidelines provided to you. Your role is to support doctors by providing 
 relevant information and guidance, not to offer medical advice to patients or non-medical persons.
