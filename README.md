@@ -30,6 +30,10 @@ vi. Create S3 bucket and a folder. Download files available in the 'Sample Files
 vii. Access Amazon Bedrock. Click 'Get Started'. Scroll down the left side bar, locate and click 'Model Access'. Request access for Anthropic Claude model.
 
 ### 3. Fork Codespaces
+Look for # Configure cached vector database in the ```chatbot_version1.py``` file.
+
+Specify bucket_name and folder_path based on your S3 bucket and folder names.
+
 Install aws cli.
 
 Install python3.
