@@ -12,7 +12,7 @@ Note: This chatbot is intended for use by licensed healthcare providers only. It
 
 ## View Demo
 
-### 1. Fork Codespace
+### 1. Click Code and create a Codespace on main.
 
 ### 2. Create account on AWS console
 i. Log on to https://aws.amazon.com/console/.
