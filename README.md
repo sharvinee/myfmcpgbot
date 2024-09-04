@@ -10,30 +10,13 @@ Note: This chatbot is intended for use by licensed healthcare providers only. It
 - Concise and Evidence-Based Responses: Generates responses that are clear, concise, and rooted in the latest evidence-based practices.
 - Disclaimer Inclusion: Automatically includes a disclaimer with every response to clarify the intended use and limitations of the chatbot.
 
-## Installation
-To get started with the Family Medicine Clinical Practice Guidelines Chatbot, follow these steps:
+## View Demo
 
-### Clone the repository:
+### 1. Clone Repository
 
-```
-git clone https://github.com/sharvinee/myfmcpgbot.git
-cd myfmcpgbot
-```
+### 2. Create account on AWS console
 
-### Install dependencies:
 
-```
-pip install -r requirements.txt
-```
-
-Set up environment variables: Create a .env file in the project root directory and add your environment variables, such as API keys and model paths.
-
-Run the chatbot:
-
-bash
-Copy code
-python run_chatbot.py
-Usage
 Once the chatbot is up and running, licensed healthcare providers can interact with it to retrieve clinical guidelines in family medicine. Simply ask a question or request guidance, and the chatbot will respond with relevant information, along with a standard disclaimer.
 
 Example Interaction
@@ -43,22 +26,14 @@ Chatbot: According to the latest guidelines, first-line treatment for hypertensi
 
 This information is intended for use by licensed healthcare providers only and is not a substitute for professional medical advice, diagnosis, or treatment. This tool is currently under development, and while we strive for accuracy, there may be limitations in the information provided.
 
-Development Status
+## Development Status
 This project is currently under development. While the chatbot aims to provide accurate and up-to-date information, there may be limitations or inaccuracies. We are actively working on improving the system, and contributions are welcome.
 
-Contributing
+### Contributing
 We welcome contributions from the community. If you're interested in contributing, please follow these steps:
 
-Fork the repository.
-Create a new branch (git checkout -b feature/your-feature-name).
-Commit your changes (git commit -m 'Add some feature').
-Push to the branch (git push origin feature/your-feature-name).
-Open a pull request.
-Please ensure that your code follows the project's coding standards and includes appropriate tests.
-
-License
+### License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
-Acknowledgements
-Special thanks to the healthcare professionals and researchers who provide the clinical guidelines used in this project.
+### Acknowledgements
 This project was inspired by the need for quick and reliable access to family medicine guidelines in clinical settings.
