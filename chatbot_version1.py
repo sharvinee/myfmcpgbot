@@ -15,7 +15,7 @@ import tempfile
 
 #Configure streamlit app
 st.set_page_config(page_title="Family Medicine Clinical Practice Guidelines", page_icon="➳❥", layout = "centered")
-st.title("📖 Family Medicine Clinical Practice Guidelines \n your one stop latest CPG chatbot")
+st.title("📖 Family Medicine Clinical Practice Guidelines \n Information derived from published clinical practice guideliness")
 
 #Define convenience functions
 @st.cache_resource
@@ -33,6 +33,7 @@ def config_llm():
     llm = BedrockLLM(model_id=mymodel_id, client=myclient, model_kwargs=mymodel_kwargs)
     return llm
 
+# Configure cached vector database
 @st.cache_resource
 def config_vector_db():
     s3_client = boto3.client('s3')
@@ -40,8 +41,9 @@ def config_vector_db():
     bedrock_embeddings = BedrockEmbeddings(client=bedrock_client)
     all_documents = []
 
-    bucket_name = 'chatbot1-bucket'
-    folder_path = 'chatbot1-folder'
+    # Specify bucket_name and folder_path based on your S3 bucket and folder names.
+    bucket_name = '<S3 bucket name>' # S3 bucket name
+    folder_path = '<S3 folder name in specified bucket>' # S3 folder name in specified bucket
 
     # List all files in the S3 folder
     s3_objects = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=folder_path)
@@ -81,7 +83,9 @@ vectorstore_faiss = config_vector_db()
 
 context = """
 You are a knowledgeable assistant specialized in various clinical practice guidelines 
-exclusively for licensed healthcare providers. Your responses should be concise, 
+exclusively for licensed healthcare providers. Your answers should be derived from the main source of reference for the particular
+subject. For example, if you are asked about blood pressure or hypertension, you must refer to the hypertension guideliness instead of
+the other guideliness although they may contain information about hypertension too. Your responses should be concise, 
 and aligned with the clinical practice guidelines provided to you. Your role is to support doctors by providing 
 relevant information and guidance, not to offer medical advice to patients or non-medical persons.
 
