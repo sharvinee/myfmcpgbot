@@ -12,11 +12,41 @@ Note: This chatbot is intended for use by licensed healthcare providers only. It
 
 ## View Demo
 
-### 1. Clone Repository
+### 1. Fork Codespace
 
 ### 2. Create account on AWS console
+i. Log on to https://aws.amazon.com/console/.
 
+ii. Click 'Sign in to the Console' on the top right corner. Sign up if you do not have an AWS account. 
 
+iii. Create User Group.
+
+iv. Create IAM user and assign Administrator Access to user. Be sure to download the AccessKey and save it in a folder on your local desktop.
+
+v. Create EC2 instance. Configure instance security and make sure to add a new rule specifying port 8501.
+
+vi. Create S3 bucket and a folder. Download files available in the 'Sample Files' section and upload it into the S3 folder. 
+
+vii. Access Amazon Bedrock. Click 'Get Started'. Scroll down the left side bar, locate and click 'Model Access'. Request access for Anthropic Claude model.
+
+### 3. Fork Codespaces
+Install aws cli.
+
+Install python3.
+
+Install pip.
+
+Install all the libraries as listed in the #Import Libraries section of the chatbot_version.py file.
+
+Type ```aws configure```
+
+Key in your ACCESS KEY details. 
+
+Type '''streamlit run chatbot_version1.py```
+
+Open the 'External URL: xxxxxxxxxxx'
+
+### 4. Playing with the chatbot
 Once the chatbot is up and running, licensed healthcare providers can interact with it to retrieve clinical guidelines in family medicine. Simply ask a question or request guidance, and the chatbot will respond with relevant information, along with a standard disclaimer.
 
 Example Interaction
@@ -29,10 +59,10 @@ This information is intended for use by licensed healthcare providers only and i
 ## Development Status
 This project is currently under development. While the chatbot aims to provide accurate and up-to-date information, there may be limitations or inaccuracies. We are actively working on improving the system, and contributions are welcome.
 
-### Contributing
+## Contributing
 We welcome contributions from the community. If you're interested in contributing, please follow these steps:
 
-### License
+## License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
 ### Acknowledgements
