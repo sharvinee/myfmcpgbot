@@ -69,5 +69,5 @@ We welcome contributions from the community. If you're interested in contributin
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
-### Acknowledgements
+## Acknowledgements
 This project was inspired by the need for quick and reliable access to family medicine guidelines in clinical settings.
