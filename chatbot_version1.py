@@ -1,5 +1,4 @@
 #Import libraries
-import os
 import boto3
 from langchain_community.embeddings import BedrockEmbeddings
 from langchain_aws import BedrockLLM
