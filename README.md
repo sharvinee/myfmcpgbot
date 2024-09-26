@@ -34,13 +34,7 @@ Look for # Configure cached vector database in the ```chatbot_version1.py``` fil
 
 Specify bucket_name and folder_path based on your S3 bucket and folder names.
 
-Install aws cli.
-
-Install python3.
-
-Install pip.
-
-Install all the libraries as listed in the #Import Libraries section of the chatbot_version.py file.
+Install all required libraries listed in the requirements.txt file
 
 Type ```aws configure```
 
