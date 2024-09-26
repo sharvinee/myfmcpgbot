@@ -44,7 +44,7 @@ Type '''streamlit run chatbot_version1.py```
 
 Open the 'External URL: xxxxxxxxxxx'
 
-### 4. Playing with the chatbot
+### 4. Testing the chatbot
 Once the chatbot is up and running, licensed healthcare providers can interact with it to retrieve clinical guidelines in family medicine. Simply ask a question or request guidance, and the chatbot will respond with relevant information, along with a standard disclaimer.
 
 Example Interaction
