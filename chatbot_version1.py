@@ -20,7 +20,6 @@ st.title("📖 Family Medicine Clinical Practice Guidelines \n Information deriv
 @st.cache_resource
 def config_llm():
     myclient = boto3.client('bedrock-runtime')
-
     mymodel_kwargs = { 
         "max_tokens_to_sample": 512,
         "temperature":0.1,  
